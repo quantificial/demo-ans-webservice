@@ -1,5 +1,6 @@
 package demo.ans.webservice.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.jws.WebService;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 import demo.ans.webservice.database.model.oracle.PolicyXMaster;
 import demo.ans.webservice.database.model.oracle.PolicyXMasterRepository;
 
-@InInterceptors(interceptors={"demo.ans.webservice.AuthInterceptor"})
+@InInterceptors(interceptors={"demo.ans.webservice.BasicAuthInterceptor"})
 @WebService(serviceName = "PolicyService", targetNamespace = "http://demo.ans.webservice/", endpointInterface = "demo.ans.webservice.services.PolicyService")
 @Component
 public class PolicyServiceImpl implements PolicyService {
@@ -34,6 +35,21 @@ public class PolicyServiceImpl implements PolicyService {
 	public boolean addPolicy(PolicyXMaster policyXMaster) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public int getOwnerClientNumber(String policyNumber) {
+		Optional<PolicyXMaster> data = policyXMasterRepository.findByPolicyNumber(policyNumber);
+		
+		return data.get().getOwnerClientNumber();
+	}
+
+	@Override
+	public List<PolicyXMaster> getAllPolicies() {
+		
+		List<PolicyXMaster> result = policyXMasterRepository.findAll();
+		
+		return result;
 	}
 
 }

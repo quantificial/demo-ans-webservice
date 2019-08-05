@@ -12,13 +12,13 @@ import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
 
-public class AuthInterceptor extends AbstractSoapInterceptor {
+public class BasicAuthInterceptor extends AbstractSoapInterceptor {
 	
     private static final String BASIC_PREFIX = "Basic ";
     private static final String USERNAME = "dummy";
     private static final String PASSWORD = "abcd1234";
 
-    public AuthInterceptor() {
+    public BasicAuthInterceptor() {
         super(Phase.PRE_INVOKE);
     }
 

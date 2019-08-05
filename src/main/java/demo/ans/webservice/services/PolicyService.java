@@ -1,12 +1,17 @@
 package demo.ans.webservice.services;
 
+import java.util.List;
+
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.xml.bind.annotation.XmlElement;
 
 import demo.ans.webservice.database.model.oracle.PolicyXMaster;
 
 @WebService(targetNamespace="http://demo.ans.webservice/")
+//@SOAPBinding(style = SOAPBinding.Style.RPC)
 public interface PolicyService {
 	
 	// in order to test the service in SOAP-UI
@@ -15,8 +20,17 @@ public interface PolicyService {
 	// use Authenticate pre-emptively
 
 	@WebMethod
+	@XmlElement(name="policy")
 	PolicyXMaster getPolicyByPolicyNumber(@WebParam(name = "policyNumber") String policyNumber);
-
+	
+	@WebMethod
+	@XmlElement(name="clientNumber")
+	int getOwnerClientNumber(@WebParam(name="policyNumber") String policyNumber);
+	
+	@WebMethod
+	@XmlElement(name="policy")
+	List<PolicyXMaster> getAllPolicies();
+	
 	@WebMethod
 	boolean addPolicy(PolicyXMaster policyXMaster);
 	

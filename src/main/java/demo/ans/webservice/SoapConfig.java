@@ -29,6 +29,13 @@ public class SoapConfig {
         return endpoint;
     }
     
+//    @Bean
+//    public Endpoint endpoint2() {
+//        EndpointImpl endpoint = new EndpointImpl(bus, policyService);
+//        endpoint.publish("/policyService2");
+//        return endpoint;
+//    }
+    
       // Alternative way to set the context path for the service endpoints
       // for example, with the configuration below, all the service endpoints will be
       // available at URL /services/* 
