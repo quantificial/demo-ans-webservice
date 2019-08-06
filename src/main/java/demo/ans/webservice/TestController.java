@@ -28,16 +28,28 @@ public class TestController {
     	
 		log.info("consume soap service start.......");
 		
+		// download the target server certificate as server.crt or server.cer
+		// and the use keytool to convert into key store for the Java application to use
+		
+		// keytool -import -alias testclient -keystore clientKeyStore -file server.crt
+		
+		String filePath= Thread.currentThread().getContextClassLoader().getResource("keystore/clientKeyStore").getFile();
+		log.info("trust store path: " + filePath);
+		System.setProperty("javax.net.ssl.trustStore", filePath);
+		//System.setProperty("javax.net.ssl.keyStorePassword", "abcd1234");
+		
 		JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
 		
-		Client client = dcf.createClient("http://localhost:8443/api/policyService?wsdl");
+		Client client = dcf.createClient("https://test1.local:8443/api/policyService?wsdl");
 		
 		// create header
 		Map<String, List<String>> headers = new HashMap<String, List<String>>();
 		
 		//headers.put("XXX-SOA-SERVICE-NAME", Arrays.asList("SampleService"));
 		//headers.put("XXX-SOA-APP-NAME", Arrays.asList("SampleServiceAppv1"));
-		headers.put("Authorization", Arrays.asList("Basic ZHVtbXk6YWJjZDEyMzQ="));
+		//headers.put("Authorization", Arrays.asList("Basic ZHVtbXk6YWJjZDEyMzQ="));
+		headers.put("x-HKMCA-client-id", Arrays.asList("user"));
+		headers.put("x-HKMCA-client-secret", Arrays.asList("abcd1234"));
 		
 		//client.getRequestContext().put("Authorization", "Basic ZHVtbXk6YWJjZDEyMzQ=");
 		
