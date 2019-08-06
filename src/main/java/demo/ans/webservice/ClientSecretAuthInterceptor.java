@@ -40,8 +40,6 @@ public class ClientSecretAuthInterceptor extends AbstractSoapInterceptor {
     	
         HttpServletRequest request = (HttpServletRequest) message.get(AbstractHTTPDestination.HTTP_REQUEST);
           
-        System.out.println(clientIdHeader);
-        System.out.println(clientId);
         String requestClientId = request.getHeader(clientIdHeader);
         
         if (requestClientId == null) {
@@ -54,7 +52,7 @@ public class ClientSecretAuthInterceptor extends AbstractSoapInterceptor {
         if (requestClientSecret == null) {
             SOAPException exception = new SOAPException("required header ["+clientSecretHeader+"] not exists");
             throw new Fault(exception);
-        }    
+        }
         
         
         if (!clientId.equals(requestClientId) || !clientSecret.equals(requestClientSecret)) {
