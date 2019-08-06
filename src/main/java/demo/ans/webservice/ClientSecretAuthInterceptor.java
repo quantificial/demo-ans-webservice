@@ -44,20 +44,32 @@ public class ClientSecretAuthInterceptor extends AbstractSoapInterceptor {
         
         if (requestClientId == null) {
             SOAPException exception = new SOAPException("required header ["+clientIdHeader+"] not exists");
-            throw new Fault(exception);
+            
+            Fault f = new Fault(exception);
+            f.setStatusCode(403);
+            
+            throw f;
         }
         
         String requestClientSecret = request.getHeader(clientSecretHeader);
         
         if (requestClientSecret == null) {
             SOAPException exception = new SOAPException("required header ["+clientSecretHeader+"] not exists");
-            throw new Fault(exception);
+            
+            Fault f = new Fault(exception);
+            f.setStatusCode(403);
+            
+            throw f;
         }
         
         
         if (!clientId.equals(requestClientId) || !clientSecret.equals(requestClientSecret)) {
             SOAPException exception = new SOAPException("authentication failed, client id or client secret is incorrect");
-            throw new Fault(exception);
+            
+            Fault f = new Fault(exception);
+            f.setStatusCode(403);
+            
+            throw f;
         }
     }
 }
