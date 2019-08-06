@@ -14,7 +14,7 @@ import lombok.ToString;
 @Data
 @ToString
 @Table(name="T_POLICY_MASTER")
-public class PolicyXMaster {
+public class OraclePolicyMaster {
 	
 	@Id
 	@Column(name="UNIQUE_ID")

@@ -1,8 +1,15 @@
 package demo.ans.webservice;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
+import org.apache.cxf.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,8 +21,8 @@ import demo.ans.webservice.database.model.h2.ClientMaster;
 import demo.ans.webservice.database.model.h2.ClientMasterRepository;
 import demo.ans.webservice.database.model.h2.PolicyMaster;
 import demo.ans.webservice.database.model.h2.PolicyMasterRepository;
-import demo.ans.webservice.database.model.oracle.PolicyXMaster;
-import demo.ans.webservice.database.model.oracle.PolicyXMasterRepository;
+import demo.ans.webservice.database.model.oracle.OraclePolicyMaster;
+import demo.ans.webservice.database.model.oracle.OraclePolicyMasterRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
@@ -24,13 +31,13 @@ import lombok.extern.slf4j.Slf4j;
 public class Application implements CommandLineRunner {
 
 	@Autowired
-	private PolicyMasterRepository policyMasterRespositry;
+	private PolicyMasterRepository policyMasterRespository;
 	
 	@Autowired
 	private ClientMasterRepository clientMasterRespository;
 	
 	@Autowired
-	private PolicyXMasterRepository policyXMasterRepository;
+	private OraclePolicyMasterRepository oraclePolicyMasterRepository;
 		
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -39,11 +46,12 @@ public class Application implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		log.info("console start.......");
+		log.info("repository testing start.......");
 		
-		List<PolicyMaster> policyMaster = policyMasterRespositry.findAll();
+		List<PolicyMaster> policyMaster = policyMasterRespository.findAll();
 		
 		for(PolicyMaster pm : policyMaster) {
+			
 			log.info("Policy Number: " + pm.getPolicyNumber());
 			log.info(pm.toString());
 			
@@ -58,14 +66,11 @@ public class Application implements CommandLineRunner {
 			}
 		}
 		
-		
-		for(PolicyXMaster m : policyXMasterRepository.findAll()) {
+		for(OraclePolicyMaster m : oraclePolicyMasterRepository.findAll()) {
 			
 			log.info(m.toString());
 		}
 		
-		
-		log.info("console end.......");
 		
 	}
 

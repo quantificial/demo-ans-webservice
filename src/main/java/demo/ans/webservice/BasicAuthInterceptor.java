@@ -1,6 +1,7 @@
 package demo.ans.webservice;
 
 import java.util.Base64;
+import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.soap.SOAPException;
@@ -26,6 +27,14 @@ public class BasicAuthInterceptor extends AbstractSoapInterceptor {
     public void handleMessage(SoapMessage message) throws Fault {
     	
         HttpServletRequest request = (HttpServletRequest) message.get(AbstractHTTPDestination.HTTP_REQUEST);
+        
+        // check headers
+        
+//        Enumeration<String> a = request.getHeaderNames();
+//   
+//        for (Enumeration<String> e = a; a.hasMoreElements();)
+//            System.out.println(e.nextElement());
+       
         
         String auth = request.getHeader("Authorization");
         

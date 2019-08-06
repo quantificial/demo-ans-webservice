@@ -9,8 +9,8 @@ import org.apache.cxf.interceptor.InInterceptors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import demo.ans.webservice.database.model.oracle.PolicyXMaster;
-import demo.ans.webservice.database.model.oracle.PolicyXMasterRepository;
+import demo.ans.webservice.database.model.oracle.OraclePolicyMaster;
+import demo.ans.webservice.database.model.oracle.OraclePolicyMasterRepository;
 
 @InInterceptors(interceptors={"demo.ans.webservice.BasicAuthInterceptor"})
 @WebService(serviceName = "PolicyService", targetNamespace = "http://demo.ans.webservice/", endpointInterface = "demo.ans.webservice.services.PolicyService")
@@ -18,36 +18,36 @@ import demo.ans.webservice.database.model.oracle.PolicyXMasterRepository;
 public class PolicyServiceImpl implements PolicyService {
 	
 	@Autowired
-	private PolicyXMasterRepository policyXMasterRepository;
+	private OraclePolicyMasterRepository oraclePolicyMasterRepository;
 
 	@Override
-	public PolicyXMaster getPolicyByPolicyNumber(String policyNumber) {
+	public OraclePolicyMaster getPolicyByPolicyNumber(String policyNumber) {
 
 		// need to create and implement the IPolicyDAO for access the data of the policy
 		// dummy data is used in the following for the demo
 		
-		Optional<PolicyXMaster> data = policyXMasterRepository.findByPolicyNumber(policyNumber);
+		Optional<OraclePolicyMaster> data = oraclePolicyMasterRepository.findByPolicyNumber(policyNumber);
 				
 		return data.get();
 	}
 
 	@Override
-	public boolean addPolicy(PolicyXMaster policyXMaster) {
+	public boolean addPolicy(OraclePolicyMaster policyXMaster) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int getOwnerClientNumber(String policyNumber) {
-		Optional<PolicyXMaster> data = policyXMasterRepository.findByPolicyNumber(policyNumber);
+		Optional<OraclePolicyMaster> data = oraclePolicyMasterRepository.findByPolicyNumber(policyNumber);
 		
 		return data.get().getOwnerClientNumber();
 	}
 
 	@Override
-	public List<PolicyXMaster> getAllPolicies() {
+	public List<OraclePolicyMaster> getAllPolicies() {
 		
-		List<PolicyXMaster> result = policyXMasterRepository.findAll();
+		List<OraclePolicyMaster> result = oraclePolicyMasterRepository.findAll();
 		
 		return result;
 	}

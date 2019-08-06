@@ -8,7 +8,7 @@ import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
 import javax.xml.bind.annotation.XmlElement;
 
-import demo.ans.webservice.database.model.oracle.PolicyXMaster;
+import demo.ans.webservice.database.model.oracle.OraclePolicyMaster;
 
 @WebService(targetNamespace="http://demo.ans.webservice/")
 //@SOAPBinding(style = SOAPBinding.Style.RPC)
@@ -21,7 +21,7 @@ public interface PolicyService {
 
 	@WebMethod
 	@XmlElement(name="policy")
-	PolicyXMaster getPolicyByPolicyNumber(@WebParam(name = "policyNumber") String policyNumber);
+	OraclePolicyMaster getPolicyByPolicyNumber(@WebParam(name = "policyNumber") String policyNumber);
 	
 	@WebMethod
 	@XmlElement(name="clientNumber")
@@ -29,10 +29,10 @@ public interface PolicyService {
 	
 	@WebMethod
 	@XmlElement(name="policy")
-	List<PolicyXMaster> getAllPolicies();
+	List<OraclePolicyMaster> getAllPolicies();
 	
 	@WebMethod
-	boolean addPolicy(PolicyXMaster policyXMaster);
+	boolean addPolicy(OraclePolicyMaster policyXMaster);
 	
 
 }
