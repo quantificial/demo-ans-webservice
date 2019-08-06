@@ -13,6 +13,7 @@ import org.apache.cxf.interceptor.Fault;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
 
+
 public class BasicAuthInterceptor extends AbstractSoapInterceptor {
 	
     private static final String BASIC_PREFIX = "Basic ";

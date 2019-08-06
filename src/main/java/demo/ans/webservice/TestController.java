@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.cxf.binding.soap.SoapMessage;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.apache.cxf.message.Message;
@@ -42,6 +43,7 @@ public class TestController {
 		
 		Client client = dcf.createClient("https://test1.local:8443/api/policyService?wsdl");
 		
+		SoapMessage m;
 		// create header
 		Map<String, List<String>> headers = new HashMap<String, List<String>>();
 		
