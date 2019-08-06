@@ -1,5 +1,7 @@
 package demo.ans.webservice;
 
+import java.util.Arrays;
+
 import javax.xml.ws.Endpoint;
 
 import org.apache.cxf.Bus;
@@ -17,6 +19,9 @@ public class SoapConfig {
 	
     @Autowired
     private PolicyService policyService;
+    
+    @Autowired
+    private ClientSecretAuthInterceptor clientSecretAuthInterceptor;
 
     @Autowired
     @Qualifier(Bus.DEFAULT_BUS_ID)
@@ -25,6 +30,7 @@ public class SoapConfig {
     @Bean
     public Endpoint endpoint() {
         EndpointImpl endpoint = new EndpointImpl(bus, policyService);
+        endpoint.setInInterceptors(Arrays.asList(clientSecretAuthInterceptor));
         endpoint.publish("/policyService");
         return endpoint;
     }

@@ -12,7 +12,9 @@ import org.springframework.stereotype.Component;
 import demo.ans.webservice.database.model.oracle.OraclePolicyMaster;
 import demo.ans.webservice.database.model.oracle.OraclePolicyMasterRepository;
 
-@InInterceptors(interceptors={"demo.ans.webservice.BasicAuthInterceptor"})
+//change to add the Interceptor in the SoapConfig to make use of the spring autowired.
+//@InInterceptors(interceptors={"demo.ans.webservice.BasicAuthInterceptor"})
+@InInterceptors(interceptors={"demo.ans.webservice.ClientSecretAuthInterceptor"})
 @WebService(serviceName = "PolicyService", targetNamespace = "http://demo.ans.webservice/", endpointInterface = "demo.ans.webservice.services.PolicyService")
 @Component
 public class PolicyServiceImpl implements PolicyService {
