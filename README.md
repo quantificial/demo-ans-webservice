@@ -22,7 +22,7 @@ The Interceptor cannot be applied through annotation and must be added to the en
 
 use JaxWsDynamicClientFactory as client
 
-set the server public keyStore to the system properties
+set the server public keyStore to the system properties and trust the server SSL connection
 
 load the field through reflection
 
