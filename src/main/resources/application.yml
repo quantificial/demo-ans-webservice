@@ -1,0 +1,65 @@
+cxf:
+  path: /api
+h2:
+  datasource:
+    driverClassName: org.h2.Driver
+    jdbcUrl: ${h2.datasource.url}
+    password: password
+    url: jdbc:h2:mem:testdb
+    username: sa
+jasypt:
+  encryptor:
+    password: ${WS_SECRET:abcd1234}
+logging:
+  file: webservice.log
+  level:
+    org:
+      apache:
+        commons:
+          dbcp2: 'DEBUG '
+      hibernate: DEBUG
+      springframework:
+        security: DEBUG
+        web: ERROR
+    root: INFO
+  pattern:
+    console: '%d{yyyy-MMM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{15} - %msg%n  '
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+oracle:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    hikari:
+      connection-timeout: 60000
+      maximum-pool-size: 10
+    jdbcUrl: ${oracle.datasource.url}
+    password: ENC(nsCgG0z9PNxHOy+17mWXK63n1lVfEEdY)
+    url: jdbc:oracle:thin:@localhost:1521/ORCLPDB1
+    username: u_test
+
+server:
+  port: 8009
+  ssl:
+    enabled: false
+    key-alias: testlocal
+    key-store: classpath:keystore/output.p12
+    key-store-password: abcd1234
+    key-store-type: PKCS12
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+      settings:
+        web-allow-others: false
+trust:
+  store:
+    password: password
+ws:
+  client-id: user
+  client-id-header: x-HKMCA-client-id
+  client-secret: abcd1234
+  client-secret-header: x-HKMCA-client-secret
